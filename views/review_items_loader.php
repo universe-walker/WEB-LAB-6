@@ -7,4 +7,4 @@ $posts = $post_obj->getActivePostsWithOffset(0);
 
 <?php while ($post = $posts->fetch(PDO::FETCH_ASSOC)): ?>
 <?php require "review_item.php" ?>
-<?php endwhile; ?>
+<?php endwhile;
