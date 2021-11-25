@@ -1,0 +1,98 @@
+.main__review {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Playfair Display', sans;
+}
+
+.main__title {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 0 30px 0;
+}
+
+.review__item {
+    background-color: rgb(222, 221, 221);
+    padding: 10px 5px;
+    margin: 0 0 30px 0;
+    border-radius: 4px;
+    transition-duration: .3s;
+}
+
+.review__item:hover {
+    -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+.review__film-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.review__link {
+    text-decoration: none;
+    color: #000;
+}
+
+.review__poster-wrapper {
+    float: left;
+    padding-right: 20px;
+}
+
+.review__poster {
+    max-width: 200px;
+}
+
+.review__read-more {
+    font-size: 1.1rem;
+}
+
+.review__text {
+    margin: 20px 0;
+    text-indent: 20px;
+}
+
+.review__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.link_underline {
+    border-bottom: 1px solid #000;
+}
+
+.main__load-more-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.main__load-more {
+    padding: 20px 40px;
+    background-color: rgba(233,255,76, 0.9);
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    border-radius: 2px;
+}
+
+.main__load-more:hover {
+    background-color: rgba(233,255,76, 1);
+}
+
+@media (max-width: 320px) {
+    .review__film-title {
+        text-align: center;
+    }
+
+    .review__poster-wrapper {
+        float: none;
+        padding-right: 0;
+    }
+
+    .review__poster {
+        margin: 0 auto;
+    }
+}
