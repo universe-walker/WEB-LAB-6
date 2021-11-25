@@ -140,6 +140,10 @@
     margin: 20px 0 0 0;
   }
 
+  .comment_empty {
+    text-align: center;
+  }
+
   @media (max-width: 800px) {
     .film__trailer {
       text-align: center;
