@@ -104,3 +104,7 @@
   .blur {
     filter: blur(4px);
   }
+
+  .error {
+    color: #B81111;
+  }
