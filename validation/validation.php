@@ -56,6 +56,9 @@ class FormValidator
                 case "regexpCheck":
                     $this->regexpCheck($field, $rule_value);
                     break;
+                case "isParseInt":
+                    $this->isParseInt($field);
+                    break;
             }
         } catch (ValidatorException $e) {
             $error = $this->getErrorMessage($field, $field_rule);
@@ -76,6 +79,13 @@ class FormValidator
     {
         if (!array_key_exists($field_name, $this->data) || !$this->data[$field_name]) {
             throw new ValidatorException();
+        }
+    }
+
+    protected function isParseInt($field_name)
+    {
+        if (!is_numeric($this->data[$field_name])) {
+            throw new Exception();
         }
     }
 
