@@ -1,4 +1,5 @@
 <?php
+
 require_once "db.php";
 
 class Post extends DB
@@ -53,5 +54,37 @@ class Comment extends DB
             throw new Exception("id должен быть больше или равен 1", 1);
         }
         $this->post_id = $id;
+    }
+}
+
+class User extends DB
+{
+    public function isEmailFree($email)
+    {
+        $sth = $this->dbh->prepare("SELECT COUNT(*) FROM User WHERE email=:email");
+        $sth->execute(array(":email" => $email));
+
+        $count = (int) $sth->fetch()[0];
+
+        return $count === 0;
+    }
+
+    public function save($name, $email, $phone, $password)
+    {
+        try {
+            $sth = $this->dbh->prepare("
+            INSERT INTO User (name, email, phone, password_hash) VALUES
+                (:name, :email, :phone, :password_hash)
+            ");
+
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+            $sth->execute(array(":name" => $name, ":email" => $email, ":phone" => $phone, ":password_hash" => $password_hash));
+            
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+        return true;
     }
 }
