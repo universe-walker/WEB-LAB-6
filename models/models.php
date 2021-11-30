@@ -59,6 +59,20 @@ class Comment extends DB
 
 class User extends DB
 {
+    public function getUserById($id)
+    {
+        $sth = $this->dbh->prepare("
+            SELECT * FROM User
+            WHERE user_id=:user_id
+        ");
+
+        $sth->bindValue(":user_id", $id, PDO::PARAM_INT);
+
+        $sth->execute();
+
+        return $sth->fetch();
+    }
+
     public function getUserIdByEmail($email)
     {
         $sth = $this->dbh->prepare("
