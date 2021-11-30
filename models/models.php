@@ -77,10 +77,13 @@ class User extends DB
                 (:name, :email, :phone, :password_hash)
             ");
 
+            $save_name = htmlspecialchars($name);
+            $save_email = htmlspecialchars($email);
+            $save_phone = htmlspecialchars($phone);
+
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-            $sth->execute(array(":name" => $name, ":email" => $email, ":phone" => $phone, ":password_hash" => $password_hash));
-            
+            $sth->execute(array(":name" => $save_name, ":email" => $save_email, ":phone" => $save_phone, ":password_hash" => $password_hash));
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;
