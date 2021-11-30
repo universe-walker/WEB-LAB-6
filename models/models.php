@@ -59,6 +59,18 @@ class Comment extends DB
 
 class User extends DB
 {
+    public function getUserIdByEmail($email)
+    {
+        $sth = $this->dbh->prepare("
+        SELECT user_id FROM User
+        WHERE email=:email
+        ");
+
+        $sth->execute(array(":email" => $email));
+
+        return $sth->fetch()[0];
+    }
+
     public function isEmailFree($email)
     {
         $sth = $this->dbh->prepare("SELECT COUNT(*) FROM User WHERE email=:email");
