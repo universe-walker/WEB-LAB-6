@@ -41,7 +41,7 @@
             <?php endif; ?>
         </div>
         <div class="review__author-wrapper">
-            <span class="border">Автор: <span class="review__author">Автор заглушка</span></span>
+            <span class="border">Автор: <span class="review__author"><?= $post['name'] ?></span></span>
         </div>
     </article>
 </div>
