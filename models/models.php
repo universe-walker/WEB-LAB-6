@@ -22,7 +22,13 @@ class Post extends DB
 
     public function getPostById($id)
     {
-        $sth = $this->dbh->prepare('SELECT * FROM post WHERE post_id = :post_id');
+        $sth = $this->dbh->prepare("
+        SELECT P.post_id, P.title, P.original_title, P.poster, P.trailer_link, 
+               P.release_year, P.text_post, P.rating, P.date, U.name
+                FROM post AS P
+                JOIN `user` AS U ON P.user_id=U.user_id
+                WHERE P.is_published AND P.post_id=:post_id;
+        ");
         $sth->bindValue(':post_id', $id, PDO::PARAM_INT);
         $sth->execute();
         return $sth->fetch();
