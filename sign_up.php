@@ -1,9 +1,8 @@
 <?php
 
-session_start();
-if (!$_SESSION['user_id']) {
-    header("Location: /");
-}
+require_once "auth/utils.php";
+redirectIfUserLogged();
+
 
 header("Content-Type: application/json");
 
