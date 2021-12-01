@@ -6,7 +6,14 @@ class Post extends DB
 {
     public function getActivePostsWithOffset($offset, $limit=2)
     {
-        $sth = $this->dbh->prepare("SELECT * FROM post WHERE is_published ORDER BY post_id DESC LIMIT ?, ?");
+        $sth = $this->dbh->prepare("
+        SELECT P.post_id, P.title, P.original_title, P.poster, P.text_post, P.date, U.name
+            FROM post AS P
+            JOIN `user` AS U ON P.user_id=U.user_id
+            WHERE P.is_published
+            ORDER BY P.post_id DESC
+            LIMIT ?, ?
+        ");
         $sth->bindValue(1, $offset, PDO::PARAM_INT);
         $sth->bindValue(2, $limit, PDO::PARAM_INT);
         $sth->execute();
@@ -71,6 +78,31 @@ class User extends DB
         $sth->execute();
 
         return $sth->fetch();
+    }
+
+    public function getUserByEmail($email)
+    {
+        $sth = $this->dbh->prepare("
+        SELECT * FROM User
+        WHERE email=:email
+        ");
+
+        $sth->execute(array(":email" => $email));
+
+        return $sth->fetch();
+    }
+
+    public function getUserIfPasswordVerify($email, $password)
+    {
+        $user = $this->getUserByEmail($email);
+        if ($user)
+        {
+            if (password_verify($password, $user['password_hash'])) {
+                return $user;
+            }
+        }
+
+        return false;
     }
 
     public function getUserIdByEmail($email)
