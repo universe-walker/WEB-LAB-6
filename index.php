@@ -1,3 +1,8 @@
+<?php
+    require_once "auth/utils.php";
+    $user = getUserIfUserLogged();
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -28,9 +33,12 @@
                 </div>
             </div>
         </div>
-        <?php require_once "views/layouts/footer.php"; ?>
+        <?php require_once "views/layouts/footer.php" ?>
+        <?php require_once "views/layouts/popup.php" ?>
     </div>
+    <script src="node_modules/just-validate/dist/js/just-validate.min.js"></script>
     <script src="views/js/load_more_posts.js"></script>
+    <script src="views/js/modal_window.js"></script>
 </body>
 
 </html>
