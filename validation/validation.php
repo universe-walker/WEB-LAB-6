@@ -85,7 +85,7 @@ class FormValidator
     protected function isParseInt($field_name)
     {
         if (!is_numeric($this->data[$field_name])) {
-            throw new Exception();
+            throw new ValidatorException();
         }
     }
 
