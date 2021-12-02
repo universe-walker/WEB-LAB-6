@@ -83,6 +83,29 @@ class Comment extends DB
         return $this->dbh->lastInsertId();
     }
 
+    public function getCommentById($id)
+    {
+        $sth = $this->dbh->prepare(
+            "SELECT
+                C.id,
+                C.text,
+                C.date_time,
+                U.name,
+                U.avatar
+            FROM
+                `comment` AS C
+            JOIN USER AS U
+            ON
+                C.user_id = U.user_id
+            WHERE
+                C.id = :comment_id
+        ");
+
+        $sth->bindValue(":comment_id", $id, PDO::PARAM_INT);
+        $sth->execute();
+
+        return $sth->fetch();
+    }
 }
 
 class User extends DB
