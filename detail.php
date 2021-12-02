@@ -1,6 +1,12 @@
 <?php
     require_once "auth/utils.php";
     $user = getUserIfUserLogged();
+
+    require_once "models/models.php";
+
+    $post_id = (int) $_GET['post-id'];
+    $post_obj = new Post();
+    $post = $post_obj->getPostById($post_id);
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +16,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>КинтоТекст | Новые времена</title>
+    <title>КинтоТекст | <?= $post['title'] ?></title>
     <link rel="stylesheet" href="/views/css/reset.css">
     <link rel="stylesheet" href="/views/css/base_style.css">
     <link rel="stylesheet" href="/views/css/detail.css">

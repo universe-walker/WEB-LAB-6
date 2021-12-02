@@ -1,11 +1,3 @@
-<?php
-    require_once "models/models.php";
-
-    $post_id = (int) $_GET['post-id'];
-    $post_obj = new Post();
-    $post = $post_obj->getPostById($post_id);
-?>
-
 <div class="main__film">
     <div class="film__about">
         <div class="film__left">
