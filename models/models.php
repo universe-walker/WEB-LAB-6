@@ -63,6 +63,26 @@ class Comment extends DB
         $sth->execute();
         return $sth;
     }
+
+    public function insertNewCommentAndReturnItId($post_id, $text, $user_id) 
+    {
+        try {
+            $sth = $this->dbh->prepare(
+                "INSERT INTO comment (post_id, user_id, text, date_time, is_active) VALUES
+                    (:post_id, :user_id, :text, NOW(), 1) 
+            ");
+            $sth->bindValue(":post_id", $post_id, PDO::PARAM_INT);
+            $sth->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+            $sth->bindValue(":text", htmlspecialchars($text));
+
+            $sth->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+
+        return $this->dbh->lastInsertId();
+    }
+
 }
 
 class User extends DB
