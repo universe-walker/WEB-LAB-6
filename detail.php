@@ -1,3 +1,8 @@
+<?php
+    require_once "auth/utils.php";
+    $user = getUserIfUserLogged();
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -23,13 +28,19 @@
                         <div class="main__comment">
                             <?php require_once "views/comment_loader.php" ?>
                         </div>
+                        <?php if ($user): ?>
+                        <?php require_once "views/layouts/comment_form.php" ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
+        <?php require_once "views/layouts/footer.php"; ?>
+        <?php require_once "views/layouts/popup.php" ?>
     </div>
-    <?php require_once "views/layouts/footer.php"; ?>
-    </div>
+    <script src="/node_modules/just-validate/dist/js/just-validate.min.js"></script>
+    <script src="/views/js/modal_window.js"></script>
+    <script src="/views/js/check_comment_form.js"></script>
 </body>
 
 </html>
