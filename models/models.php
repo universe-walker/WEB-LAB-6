@@ -41,12 +41,24 @@ class Comment extends DB
     public function getAllActiveComments($post_id)
     {
         $sth = $this->dbh->prepare(
-            "SELECT id, text, date_time, is_active
-            FROM comment AS C
-            JOIN post AS P ON C.post_id=P.post_id
-            WHERE P.post_id=:post_id AND C.is_active
-        "
-        );
+            "SELECT
+                C.id,
+                C.text,
+                C.date_time,
+                C.is_active,
+                U.name,
+                U.avatar
+            FROM
+                `comment` AS C
+            JOIN post AS P
+            ON
+                C.post_id = P.post_id
+            JOIN `user` AS U
+            ON
+                C.user_id = U.user_id
+            WHERE
+                P.post_id = :post_id AND C.is_active
+        ");
         $sth->bindValue(":post_id", $post_id, PDO::PARAM_INT);
         $sth->execute();
         return $sth;
