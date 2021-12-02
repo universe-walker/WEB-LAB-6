@@ -1,8 +1,7 @@
 <?php
 $post_id = (int) $_GET['post-id'];
 $comment_obj = new Comment();
-$comment_obj->setPostId($post_id);
-$comments = $comment_obj->getAllActiveComments();
+$comments = $comment_obj->getAllActiveComments($post_id);
 ?>
 
 <?php if ($comments->rowCount() < 1): ?>
