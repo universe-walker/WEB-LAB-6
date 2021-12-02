@@ -14,16 +14,20 @@ document.addEventListener('DOMContentLoaded', function() {
        })
     }
 
-    loginLink.addEventListener('click', () => {
-       modalWindow.classList.toggle('hidden');
-       toggleBlurAllExceptModalWindow();
-    });
+    if (!!loginLink) {
+      loginLink.addEventListener('click', () => {
+         modalWindow.classList.toggle('hidden');
+         toggleBlurAllExceptModalWindow();
+      });
+    }
  
     let modalCancel = document.querySelector('.modal__cancel');
-    modalCancel.addEventListener('click', () => {
-       modalWindow.classList.toggle('hidden');
-       toggleBlurAllExceptModalWindow();
-    });
+    if (!!modalCancel) {
+      modalCancel.addEventListener('click', () => {
+         modalWindow.classList.toggle('hidden');
+         toggleBlurAllExceptModalWindow();
+      });
+    }
  
     /* валидация регистрации/входа */
  
@@ -128,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
        rules: {
           email: {
              required: true,
-             email: true
+             email: true,
           },
           password: {
              required: true,
@@ -140,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
           email: { 
              required: 'Это поле обязательное',
              email: 'Пожалуйста, введите правильный email',
-             remote: 'Email уже существует'
           },
           password: {
              required: 'Это поле обязательное',
@@ -148,6 +151,26 @@ document.addEventListener('DOMContentLoaded', function() {
              maxLength: 'Поле должно содержать максимум :value символов',
              minLength: 'Поле должно содержать минимум :value символов',
           }
+       },
+       submitHandler: (form, values, ajax) => {
+         try {
+            ajax({
+               url: '/sign_in.php',
+               method: 'POST',
+               data: values,
+               async: true,
+               callback: function(response)  {
+                  result = JSON.parse(response);
+                 if (result.errors) {
+                    showErrors('.log-in__btn', result.errors);
+                 } else {
+                    window.location.reload();
+                 }
+               }
+             });
+         } catch (e) {
+            console.log("Вход ошибка " + e.name + " : " + e.message);
+         }
        }
     });
  
