@@ -3,7 +3,7 @@
     <div class="comment__avatar-wrapper">
       <img src="картинка заглушка" alt="" class="comment__avatar">
     </div>
-    <div class="comment__author">Автор заглушка</div>
+    <div class="comment__author"><?= $comment['name'] ?></div>
   </div>
   <div class="comment__text"><?= $comment['text'] ?>
   </div>
