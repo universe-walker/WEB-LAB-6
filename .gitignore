@@ -1,3 +1,9 @@
+########### VSCode
+.vscode/
+
+########## Загрузки
+upload/
+
 ##### Windows
 # Windows thumbnail cache files
 Thumbs.db
