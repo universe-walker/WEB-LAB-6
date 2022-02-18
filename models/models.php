@@ -8,8 +8,8 @@ class Post extends DB
     {
         $sth = $this->dbh->prepare("
         SELECT P.post_id, P.title, P.original_title, P.poster, P.text_post, P.date, U.name
-            FROM post AS P
-            JOIN `user` AS U ON P.user_id=U.user_id
+            FROM Post AS P
+            JOIN `User` AS U ON P.user_id=U.user_id
             WHERE P.is_published
             ORDER BY P.post_id DESC
             LIMIT ?, ?
@@ -25,8 +25,8 @@ class Post extends DB
         $sth = $this->dbh->prepare("
         SELECT P.post_id, P.title, P.original_title, P.poster, P.trailer_link, 
                P.release_year, P.text_post, P.rating, P.date, U.name
-                FROM post AS P
-                JOIN `user` AS U ON P.user_id=U.user_id
+                FROM Post AS P
+                JOIN `User` AS U ON P.user_id=U.user_id
                 WHERE P.is_published AND P.post_id=:post_id;
         ");
         $sth->bindValue(':post_id', $id, PDO::PARAM_INT);
@@ -100,28 +100,30 @@ class Comment extends DB
                 U.name,
                 U.avatar
             FROM
-                `comment` AS C
-            JOIN post AS P
+                `Comment` AS C
+            JOIN Post AS P
             ON
                 C.post_id = P.post_id
-            JOIN `user` AS U
+            JOIN `User` AS U
             ON
                 C.user_id = U.user_id
             WHERE
                 P.post_id = :post_id AND C.is_active
-        ");
+        "
+        );
         $sth->bindValue(":post_id", $post_id, PDO::PARAM_INT);
         $sth->execute();
         return $sth;
     }
 
-    public function insertNewCommentAndReturnItId($post_id, $text, $user_id) 
+    public function insertNewCommentAndReturnItId($post_id, $text, $user_id)
     {
         try {
             $sth = $this->dbh->prepare(
                 "INSERT INTO comment (post_id, user_id, text, date_time, is_active) VALUES
                     (:post_id, :user_id, :text, NOW(), 1) 
-            ");
+            "
+            );
             $sth->bindValue(":post_id", $post_id, PDO::PARAM_INT);
             $sth->bindValue(":user_id", $user_id, PDO::PARAM_INT);
             $sth->bindValue(":text", htmlspecialchars($text));
@@ -145,12 +147,13 @@ class Comment extends DB
                 U.avatar
             FROM
                 `comment` AS C
-            JOIN USER AS U
+            JOIN User AS U
             ON
                 C.user_id = U.user_id
             WHERE
                 C.id = :comment_id
-        ");
+        "
+        );
 
         $sth->bindValue(":comment_id", $id, PDO::PARAM_INT);
         $sth->execute();
