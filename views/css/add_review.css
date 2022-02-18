@@ -1,0 +1,22 @@
+.main__title {
+    text-align: center;
+}
+
+.main__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__submit {
+    align-self: center;
+    width: 200px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+.error:last-child {
+    margin-bottom: 20px;
+}
