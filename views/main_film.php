@@ -2,8 +2,8 @@
     <div class="film__about">
         <div class="film__left">
             <div class="film__poster-wrapper">
-                <img src=<?= "/media/".$post['poster'] ?>
-                alt="Постер" class="film__poster">
+                <img src="../<?= $post['poster'] ?>"
+                    alt="Постер" class="film__poster">
             </div>
         </div>
         <div class="film__right">
