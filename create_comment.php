@@ -19,9 +19,9 @@ if (!empty($data)) {
     if (empty($errors)) {
         $comment_obj = new Comment();
         $comment_id = $comment_obj->insertNewCommentAndReturnItId((int) $data['post_id'], $data['text'], (int) $_SESSION['user_id']);
-        
+
         error_log(json_encode([(int) $data['post_id'], $data['text'], (int) $_SESSION['user_id']]));
-        
+
         $comment = $comment_obj->getCommentById($comment_id);
 
         if ($comment) {

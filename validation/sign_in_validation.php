@@ -1,4 +1,4 @@
-<?
+<?php
 
 $sign_in_rules = [
     "email" => [
