@@ -20,7 +20,9 @@ if (empty($errors)) {
     $user = $user_obj->getUserIfPasswordVerify($data['email'], $data['password']);
 
     if ($user) {
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         $_SESSION['user_id'] = $user['user_id'];
     } else {
         array_push($errors, "Неверный логин или пароль");
