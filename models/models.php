@@ -33,6 +33,57 @@ class Post extends DB
         $sth->execute();
         return $sth->fetch();
     }
+
+    public function addPost(
+        int $user_id,
+        string $title,
+        string $original_title,
+        string $poster_path,
+        string $trailer_link,
+        string $text_post,
+        bool $is_published,
+        int $release_year,
+        int $rating
+    ): int {
+        $sth = $this->dbh->prepare(
+            "INSERT INTO Post 
+            (user_id,
+            title,
+            original_title,
+            poster,
+            trailer_link,
+            text_post,
+            DATE,
+            is_published,
+            release_year,
+            rating)
+         VALUES
+            (:user_id,
+             :title,
+             :original_title,
+             :poster,
+             :trailer_link,
+             :text_post,
+             NOW(),
+             :is_published,
+             :release_year,
+             :rating);
+        "
+        );
+        $sth->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+        $sth->bindValue(":title", $title);
+        $sth->bindValue(":original_title", $original_title);
+        $sth->bindValue(":poster", $poster_path);
+        $sth->bindValue(":trailer_link", $trailer_link);
+        $sth->bindValue(":text_post", $text_post);
+        $sth->bindValue(":is_published", $is_published, PDO::PARAM_BOOL);
+        $sth->bindValue(":release_year", $release_year, PDO::PARAM_INT);
+        $sth->bindValue(":rating", $rating, PDO::PARAM_INT);
+
+        $sth->execute();
+
+        return $this->dbh->lastInsertId();
+    }
 }
 
 
