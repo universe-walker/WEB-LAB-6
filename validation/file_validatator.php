@@ -26,7 +26,7 @@ class FileValidator
     {
         $is_ok_type = false;
         foreach ($this->mime_types as $type) {
-            if ($_FILES[$this->filename]['type'] === $type) {
+            if (array_key_exists($this->filename, $_FILES) && $_FILES[$this->filename]['type'] === $type) {
                 $is_ok_type = true;
                 break;
             }
@@ -39,8 +39,7 @@ class FileValidator
 
     public function checkMaxSize()
     {
-        $file_size = $_FILES[$this->filename]['size'];
-        if ($file_size > $this->max_size_mb * 1_000_000) {
+        if (array_key_exists($this->filename, $_FILES) && $_FILES[$this->filename]['size'] > $this->max_size_mb * 1_000_000) {
             array_push($this->errors, "Размер файла превышает максимальный раземр в " . $this->max_size_mb . " мегабайт\n");
         }
     }
