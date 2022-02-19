@@ -40,8 +40,8 @@ $errors = $_SESSION['errors'] ?? array();
                             <input type="number" name="release_year" min="1895">
                             <label>Постер</label>
                             <input type="file" name="poster">
-                            <label>Встроенный код трейлера (youtube)</label>
-                            <input type="text" name="trailer_code">
+                            <label>Ссылка на трейлер (youtube)</label>
+                            <input type="text" name="trailer_link">
                             <label>Текст обзора</label>
                             <textarea name="text_post" cols="30" rows="10"></textarea>
                             <label>Оценка</label>

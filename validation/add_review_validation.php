@@ -32,7 +32,7 @@ class ReviewValidator
                     'message' => "Год выхода не может быть меньше {{ compared_value }}\n"
                 ]),
             ],
-            'trailer_code' => [
+            'trailer_link' => [
                 new Assert\Length([
                     'max' => 1000,
                     'maxMessage' => "Длина встроенного кода ролика не может превышать {{ length }}\n"
