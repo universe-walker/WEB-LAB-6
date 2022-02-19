@@ -46,8 +46,8 @@ $errors = $_SESSION['errors'] ?? array();
                             <textarea name="text_post" cols="30" rows="10"></textarea>
                             <label>Оценка</label>
                             <input type="number" name="rating">
-                            <label>Опубликовать сейчас <input type="checkbox" name="is_publish"
-                                    class="form__is-publish"></label>
+                            <label>Опубликовать сейчас <input type="checkbox" name="is_publish" class="form__is-publish"
+                                    value="false"></label>
 
                             <?php foreach ($errors as $e): ?>
                             <div class="error"><?= $e ?>
