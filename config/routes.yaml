@@ -1,0 +1,36 @@
+index:
+    path: /
+    controller: App\Controller\MainController::show
+    methods:    GET
+morePosts:
+    path: more_posts/
+    controller: App\Controller\MainController::morePosts
+    methods: GET
+pageDetail:
+    path: detail/
+    controller: App\Controller\PostDetailController::show
+    methods: GET
+signUp:
+    path: sign-up/
+    controller: App\Controller\SignUpController::signUp
+    methods: [POST, GET]
+signIn:
+    path: sign-in/
+    controller: App\Controller\SignInController::signIn
+    methods: [POST, GET]
+logOut:
+    path: log-out/
+    controller: App\Controller\LogOutController::logOut
+    methods: GET
+createComment:
+    path: create-comment/
+    controller: App\Controller\CreateCommentController::create
+    methods: [POST, GET]
+writeReview:
+    path: write-review/
+    controller: App\Controller\AddReviewController::show
+    methods: GET
+createReview:
+    path: create-review/
+    controller: App\Controller\AddReviewController::create
+    methods: [GET, POST]
